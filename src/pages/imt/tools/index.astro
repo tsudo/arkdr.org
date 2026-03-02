@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Card from '../../../components/Card.astro';
+import Section from '../../../components/Section.astro';
+import imtData from '../../../content/imt.json';
+---
+
+<BaseLayout title="IMT Dashboard" description="Incident Command dashboard — workspace, resources, forms, and federal partner links." isIMT={true}>
+
+  <div class="dashboard-header">
+    <div class="dash-brand">
+      <svg class="dash-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="42" height="42" rx="6" fill="#FFFF06"/>
+        <rect x="17" y="6" width="8" height="30" rx="2" fill="#00004F"/>
+        <rect x="6" y="17" width="30" height="8" rx="2" fill="#00004F"/>
+      </svg>
+      <div>
+        <h2 class="dash-title">Incident Command</h2>
+        <div class="dash-subtitle">Arkansas Baptist Disaster Relief</div>
+      </div>
+    </div>
+    <div class="dash-tools">
+      <form class="search-form" onsubmit="doSearch(event)" role="search">
+        <input class="search-input" type="text" id="searchInput"
+               placeholder="Search the web…"
+               autocomplete="off" spellcheck="false" aria-label="Web search" />
+        <button class="search-btn" type="submit">Search</button>
+      </form>
+      <div class="clock-area" aria-live="polite" aria-label="Current time">
+        <div id="clock">12:00:00 PM</div>
+        <div id="date">Loading…</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <Section title="Work Space" icon="fa-briefcase">
+      {imtData.workspace.map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+    </Section>
+
+    <Section title="Resources" icon="fa-link">
+      {imtData.resources.map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+    </Section>
+
+    <Section title="Forms" icon="fa-file-pen">
+      {imtData.forms.map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+    </Section>
+
+    <Section title="Federal & Partner" icon="fa-landmark">
+      {imtData.federal.map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+    </Section>
+  </div>
+</BaseLayout>
+
+<style>
+  .dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    flex-wrap: wrap;
+  }
+
+  .dash-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .dash-icon { width: 42px; height: 42px; }
+
+  .dash-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--yellow);
+    line-height: 1.2;
+  }
+
+  .dash-subtitle {
+    font-size: 0.72rem;
+    color: var(--lavender);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .dash-tools {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .search-form {
+    display: flex;
+  }
+
+  .search-input {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+    color: #fff;
+    font-size: 0.88rem;
+    padding: 8px 14px;
+    outline: none;
+    width: 240px;
+    transition: border-color 0.15s;
+  }
+  .search-input::placeholder { color: var(--gray); }
+  .search-input:focus { border-color: var(--blue); background: rgba(255,255,255,0.12); }
+
+  .search-btn {
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 0 6px 6px 0;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    transition: background 0.15s;
+  }
+  .search-btn:hover { background: var(--blue-hover); }
+
+  .clock-area { text-align: right; flex-shrink: 0; }
+
+  #clock {
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--yellow);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  #date {
+    font-size: 0.72rem;
+    color: var(--lavender);
+    margin-top: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-header { flex-direction: column; align-items: flex-start; }
+    .dash-tools { flex-wrap: wrap; width: 100%; }
+    .search-input { width: 100%; min-width: 0; flex: 1; }
+  }
+</style>
+
+<script is:inline>
+  /* Live clock */
+  function updateClock() {
+    const now = new Date();
+    let h = now.getHours();
+    const m = String(now.getMinutes()).padStart(2, '0');
+    const s = String(now.getSeconds()).padStart(2, '0');
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    document.getElementById('clock').textContent = h + ':' + m + ':' + s + ' ' + ampm;
+
+    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months = ['January','February','March','April','May','June',
+                    'July','August','September','October','November','December'];
+    document.getElementById('date').textContent =
+      days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  /* Search */
+  function doSearch(e) {
+    e.preventDefault();
+    var q = document.getElementById('searchInput').value.trim();
+    if (q) window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank');
+  }
+</script>

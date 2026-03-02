@@ -1,0 +1,21 @@
+---
+import publicData from '../content/public.json';
+---
+
+<footer class="site-footer">
+  <div class="footer-disclaimer">
+    {publicData.site.disclaimer}
+  </div>
+  <div class="footer-row">
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="/">Home</a>
+      <a href="/resources/">Resources</a>
+      <a href="/imt/">IMT</a>
+      <a href={publicData.site.officialSite} target="_blank" rel="noopener">abscdisasterrelief.org</a>
+    </nav>
+    <div class="footer-license">
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
+      &middot; Built by <a href="https://keithcrawford.me" target="_blank" rel="noopener">Keith Crawford</a>
+    </div>
+  </div>
+</footer>

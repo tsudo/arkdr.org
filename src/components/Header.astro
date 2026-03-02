@@ -1,0 +1,37 @@
+---
+interface Props {
+  currentPath: string;
+}
+const { currentPath } = Astro.props;
+const isIMT = currentPath.startsWith('/imt');
+
+function isActive(path: string): string {
+  if (path === '/' && currentPath === '/') return 'active';
+  if (path !== '/' && currentPath.startsWith(path)) return 'active';
+  return '';
+}
+---
+
+<header class="site-header">
+  <a href="/" class="brand">
+    <svg class="brand-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="42" height="42" rx="6" fill="#FFFF06"/>
+      <rect x="17" y="6" width="8" height="30" rx="2" fill="#00004F"/>
+      <rect x="6" y="17" width="30" height="8" rx="2" fill="#00004F"/>
+    </svg>
+    <div class="brand-text">
+      <h1>Arkansas Disaster Relief</h1>
+      <div class="subtitle">Volunteer Resources</div>
+    </div>
+  </a>
+
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="/" class={isActive('/')}>Home</a>
+    <a href="/resources/" class={isActive('/resources')}>Resources</a>
+    <div class="nav-divider" aria-hidden="true"></div>
+    <a href="/imt/" class={`imt-toggle ${isActive('/imt')}`} title="IMT — Incident Management Team">
+      <i class="fa-solid fa-tower-broadcast" aria-hidden="true"></i>
+      <span class="imt-label">&nbsp;IMT</span>
+    </a>
+  </nav>
+</header>

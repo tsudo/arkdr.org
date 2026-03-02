@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
+import Section from '../components/Section.astro';
+import publicData from '../content/public.json';
+---
+
+<BaseLayout title="Home">
+  <div class="hero">
+    <h2>Arkansas Baptist Disaster Relief</h2>
+    <p>Volunteer resources, training links, and federal references for Arkansas disaster relief volunteers.</p>
+    <div class="hero-actions">
+      <a href={publicData.getInvolved[0].url} class="btn-primary" target="_blank" rel="noopener">
+        <i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i> Get Involved
+      </a>
+      <a href={publicData.getInvolved[2].url} class="btn-secondary" target="_blank" rel="noopener">
+        <i class="fa-solid fa-heart" aria-hidden="true"></i> Donate
+      </a>
+      <a href="/resources/" class="btn-secondary">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i> Resources
+      </a>
+    </div>
+  </div>
+
+  <div class="callout">
+    <i class="fa-solid fa-circle-info" aria-hidden="true"></i>&nbsp;
+    {publicData.site.disclaimer} Visit the official site at
+    <a href={publicData.site.officialSite} target="_blank" rel="noopener">abscdisasterrelief.org</a>.
+  </div>
+
+  <div class="card-grid">
+    <Section title="Get Involved" icon="fa-hand-holding-heart">
+      {publicData.getInvolved.map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+    </Section>
+
+    <Section title="FEMA & Federal" icon="fa-landmark">
+      {publicData.fema.slice(0, 2).map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+      {publicData.federal.slice(0, 2).map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+    </Section>
+
+    <Section title="Training" icon="fa-graduation-cap">
+      <Card icon="fa-graduation-cap" label="Training Events" desc="Upcoming ABDR training" url={publicData.getInvolved[1].url} />
+      {publicData.training.slice(0, 3).map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+    </Section>
+
+    <Section title="Official ABDR" icon="fa-circle-info">
+      {publicData.official.map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+    </Section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/Card.astro';
+import Section from '../../components/Section.astro';
+import imtData from '../../content/imt.json';
+---
+
+<BaseLayout title="IMT" description="Incident Management Team operational tools, forms, and workspace links." isIMT={true}>
+
+  <div class="hero">
+    <h2>Incident Management Team</h2>
+    <p>Operational tools, forms, and workspace for IMT personnel.</p>
+    <div class="hero-actions">
+      <a href="/imt/tools/" class="btn-primary">
+        <i class="fa-solid fa-gauge-high" aria-hidden="true"></i> IMT Dashboard
+      </a>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <Section title="Work Space" icon="fa-briefcase">
+      {imtData.workspace.map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+    </Section>
+
+    <Section title="Forms" icon="fa-file-pen">
+      {imtData.forms.map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+    </Section>
+
+    <Section title="Resources" icon="fa-link">
+      {imtData.resources.map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+    </Section>
+
+    <Section title="Federal & Partner" icon="fa-landmark">
+      {imtData.federal.map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+    </Section>
+  </div>
+
+</BaseLayout>

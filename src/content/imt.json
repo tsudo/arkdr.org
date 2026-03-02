@@ -1,0 +1,24 @@
+{
+  "workspace": [
+    { "label": "Outlook Email", "url": "https://outlook.office.com/mail/", "icon": "fa-envelope", "desc": "outlook.office.com" },
+    { "label": "Excel Online", "url": "https://www.microsoft365.com/launch/excel?auth=2", "icon": "fa-table", "desc": "microsoft365.com" },
+    { "label": "Microsoft 365", "url": "https://www.microsoft365.com/", "icon": "fa-cloud", "desc": "Office apps & files" },
+    { "label": "ABDR Website", "url": "https://abscdisasterrelief.org", "icon": "fa-house", "desc": "abscdisasterrelief.org" }
+  ],
+  "forms": [
+    { "label": "Assistance Request", "url": "https://sbdr.formstack.com/forms/assistance_request", "icon": "fa-file-pen", "desc": "sbdr.formstack.com" },
+    { "label": "Daily Report", "url": "https://sbdr.formstack.com/forms/daily_report", "icon": "fa-calendar-check", "desc": "sbdr.formstack.com" },
+    { "label": "Dropbox Forms Folder", "url": "https://www.dropbox.com/sh/99ox606a4twzug7/AAB3dMIIOD4QC3qkQuE5yxnQa?dl=0", "icon": "fa-folder-open", "desc": "Shared form documents" }
+  ],
+  "resources": [
+    { "label": "National Weather Service", "url": "https://www.weather.gov/", "icon": "fa-cloud-sun", "desc": "weather.gov" },
+    { "label": "Entergy Storm Center", "url": "https://www.entergynewsroom.com/storm-center/", "icon": "fa-bolt", "desc": "Power outage & restoration" },
+    { "label": "National Hurricane Center", "url": "https://www.nhc.noaa.gov/", "icon": "fa-hurricane", "desc": "nhc.noaa.gov" },
+    { "label": "IDrive Arkansas", "url": "https://www.idrivearkansas.com/", "icon": "fa-road", "desc": "AR roads & traffic" }
+  ],
+  "federal": [
+    { "label": "FEMA", "url": "https://www.fema.gov/", "icon": "fa-landmark", "desc": "Federal Emergency Management Agency" },
+    { "label": "Disaster Assistance", "url": "https://www.disasterassistance.gov/", "icon": "fa-handshake-angle", "desc": "Apply for aid" },
+    { "label": "Red Cross Open Shelters", "url": "https://www.redcross.org/get-help/disaster-relief-and-recovery-services/find-an-open-shelter.html", "icon": "fa-house-medical", "desc": "Find active shelters" }
+  ]
+}

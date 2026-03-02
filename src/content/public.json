@@ -1,0 +1,53 @@
+{
+  "site": {
+    "name": "Arkansas Baptist Disaster Relief",
+    "tagline": "Volunteer Resources & Information",
+    "disclaimer": "This site is not affiliated with the Arkansas Baptist State Convention and does not represent their views. It is a volunteer-built resource for Arkansas disaster relief volunteers.",
+    "officialSite": "https://abscdisasterrelief.org"
+  },
+  "getInvolved": [
+    { "label": "Volunteer", "url": "https://abscdisasterrelief.org/volunteer/", "icon": "fa-hand-holding-heart", "desc": "How to get involved" },
+    { "label": "Training Events", "url": "https://abscdisasterrelief.org/volunteer#trainingevents", "icon": "fa-graduation-cap", "desc": "Upcoming training" },
+    { "label": "Donate", "url": "https://app.easytithe.com/App/Form/9e951403-b84b-4b7f-b87f-cc29d179501f", "icon": "fa-heart", "desc": "Support disaster relief" },
+    { "label": "ABDR Official Site", "url": "https://abscdisasterrelief.org", "icon": "fa-house", "desc": "abscdisasterrelief.org" }
+  ],
+  "apps": [
+    { "label": "SBDR Forms — iOS", "url": "https://apps.apple.com/us/app/sbdr-forms-app/id6478975219", "icon": "fa-brands fa-apple", "desc": "App Store" },
+    { "label": "SBDR Forms — Android", "url": "https://play.google.com/store/apps/details?id=com.goodbarber.nambsbc23staff1", "icon": "fa-brands fa-google-play", "desc": "Google Play" }
+  ],
+  "fema": [
+    { "label": "FEMA", "url": "https://www.fema.gov/", "icon": "fa-landmark", "desc": "Federal Emergency Management Agency" },
+    { "label": "Disaster Assistance", "url": "https://www.disasterassistance.gov/", "icon": "fa-handshake-angle", "desc": "Apply for federal aid" },
+    { "label": "FEMA Course List", "url": "https://training.fema.gov/is/crslist.aspx?all=true", "icon": "fa-book-open", "desc": "Independent study courses" },
+    { "label": "Debris Removal Guidelines", "url": "https://www.fema.gov/node/debris-removal-guidelines", "icon": "fa-truck-pickup", "desc": "FEMA guidance" },
+    { "label": "Multimedia Toolkit", "url": "https://www.fema.gov/disaster/recover/multimedia-toolkit", "icon": "fa-photo-film", "desc": "Graphics & resources" }
+  ],
+  "femaText": {
+    "number": "43362",
+    "commands": [
+      { "command": "SHELTER + ZIP", "desc": "Find a shelter near you" },
+      { "command": "DRC + ZIP", "desc": "Find a Disaster Recovery Center" },
+      { "command": "APPLE or ANDROID", "desc": "Get the FEMA App" }
+    ]
+  },
+  "federal": [
+    { "label": "National Weather Service", "url": "https://www.weather.gov/", "icon": "fa-cloud-sun", "desc": "weather.gov" },
+    { "label": "National Hurricane Center", "url": "https://www.nhc.noaa.gov/", "icon": "fa-hurricane", "desc": "nhc.noaa.gov" },
+    { "label": "Red Cross Open Shelters", "url": "https://www.redcross.org/get-help/disaster-relief-and-recovery-services/find-an-open-shelter.html", "icon": "fa-house-medical", "desc": "Find active shelters" },
+    { "label": "Entergy Storm Center", "url": "https://www.entergynewsroom.com/storm-center/", "icon": "fa-bolt", "desc": "Power outage & restoration" },
+    { "label": "IDrive Arkansas", "url": "https://www.idrivearkansas.com/", "icon": "fa-road", "desc": "AR roads & traffic" },
+    { "label": "AR Associations Directory", "url": "https://www.absc.org/resources/directory-of-arkansas-associations", "icon": "fa-map", "desc": "Map & contacts" }
+  ],
+  "training": [
+    { "label": "IS-100.C: Intro to ICS", "url": "https://training.fema.gov/is/courseoverview.aspx?code=IS-100.c", "icon": "fa-certificate", "desc": "Introduction to Incident Command System" },
+    { "label": "IS-200.C: Basic ICS for Initial Response", "url": "https://training.fema.gov/is/courseoverview.aspx?code=IS-200.c", "icon": "fa-certificate", "desc": "Basic ICS for initial response" },
+    { "label": "IS-700.B: Intro to NIMS", "url": "https://training.fema.gov/is/courseoverview.aspx?code=IS-700.b", "icon": "fa-certificate", "desc": "National Incident Management System" },
+    { "label": "IS-800.D: National Response Framework", "url": "https://training.fema.gov/is/courseoverview.aspx?code=IS-800.d", "icon": "fa-certificate", "desc": "Federal response coordination" }
+  ],
+  "official": [
+    { "label": "About ABDR", "url": "https://abscdisasterrelief.org/about-us/", "icon": "fa-circle-info", "desc": "Mission & history" },
+    { "label": "Newsroom", "url": "https://abscdisasterrelief.org/newsroom/", "icon": "fa-newspaper", "desc": "Latest updates" },
+    { "label": "Member Resources", "url": "https://abscdisasterrelief.org/member-resources-2/", "icon": "fa-users", "desc": "For current members" },
+    { "label": "Contact", "url": "https://abscdisasterrelief.org/contact-us/", "icon": "fa-envelope", "desc": "Get in touch" }
+  ]
+}
