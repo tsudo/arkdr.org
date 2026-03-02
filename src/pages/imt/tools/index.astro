@@ -1,185 +1,353 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Card from '../../../components/Card.astro';
-import Section from '../../../components/Section.astro';
 import imtData from '../../../content/imt.json';
 ---
 
-<BaseLayout title="IMT Dashboard" description="Incident Command dashboard — workspace, resources, forms, and federal partner links." isIMT={true}>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IMT — Incident Command</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+  <style is:inline>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-  <div class="dashboard-header">
-    <div class="dash-brand">
-      <svg class="dash-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect width="42" height="42" rx="6" fill="#FFFF06"/>
-        <rect x="17" y="6" width="8" height="30" rx="2" fill="#00004F"/>
-        <rect x="6" y="17" width="30" height="8" rx="2" fill="#00004F"/>
-      </svg>
-      <div>
-        <h2 class="dash-title">Incident Command</h2>
-        <div class="dash-subtitle">Arkansas Baptist Disaster Relief</div>
-      </div>
-    </div>
-    <div class="dash-tools">
-      <form class="search-form" onsubmit="doSearch(event)" role="search">
-        <input class="search-input" type="text" id="searchInput"
-               placeholder="Search the web…"
-               autocomplete="off" spellcheck="false" aria-label="Web search" />
-        <button class="search-btn" type="submit">Search</button>
-      </form>
-      <div class="clock-area" aria-live="polite" aria-label="Current time">
-        <div id="clock">12:00:00 PM</div>
-        <div id="date">Loading…</div>
-      </div>
-    </div>
+    :root {
+      --bg: #161921;
+      --surface: rgba(255,255,255,0.06);
+      --surface-hover: rgba(255,255,255,0.10);
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.16);
+      --text: #e8e8ec;
+      --text-dim: #8b8b96;
+      --text-muted: #62626e;
+      --accent: #4d94ff;
+      --accent-dim: rgba(77,148,255,0.14);
+      --warm: #fbbf24;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    /* ── Clock hero ── */
+    .clock-hero {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .time {
+      font-size: 4.5rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+    }
+
+    .time .ampm {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--text-dim);
+      margin-left: 6px;
+      vertical-align: super;
+    }
+
+    .date-line {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--text-dim);
+      margin-top: 6px;
+      letter-spacing: 0.01em;
+    }
+
+    .greeting {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ── Search ── */
+    .search-bar {
+      width: 100%;
+      max-width: 520px;
+      margin-bottom: 28px;
+    }
+
+    .search-bar form {
+      display: flex;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .search-bar form:focus-within {
+      border-color: var(--border-hover);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .search-bar input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-family: inherit;
+      padding: 12px 16px;
+      outline: none;
+    }
+
+    .search-bar input::placeholder { color: var(--text-muted); }
+
+    .search-bar button {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: color 0.15s;
+    }
+
+    .search-bar button:hover { color: var(--accent); }
+
+    /* ── Link groups ── */
+    .link-groups {
+      width: 100%;
+      max-width: 800px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .link-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .group-label {
+      font-size: 0.62rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      padding: 0 8px;
+      margin-bottom: 4px;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      color: var(--text);
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .link-item:hover {
+      background: var(--surface-hover);
+      color: var(--text);
+    }
+
+    .link-item .li-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .link-item .li-icon i {
+      font-size: 0.8rem;
+      color: var(--accent);
+    }
+
+    .link-item .li-text {
+      min-width: 0;
+    }
+
+    .link-item .li-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .link-item .li-host {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ── Footer bar ── */
+    .dash-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 8px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+
+    .dash-footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .dash-footer a:hover { color: var(--text-dim); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .time { font-size: 3rem; }
+      .link-groups { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      body { justify-content: flex-start; padding-top: 40px; overflow-y: auto; }
+      html, body { overflow: auto; height: auto; min-height: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .link-groups { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="clock-hero">
+    <div class="time"><span id="v2-time">12:00</span><span class="ampm" id="v2-ampm">PM</span></div>
+    <div class="date-line" id="v2-date">Loading…</div>
+    <div class="greeting" id="v2-greeting">Incident Command</div>
   </div>
 
-  <div class="card-grid">
-    <Section title="Work Space" icon="fa-briefcase">
+  <div class="search-bar">
+    <form onsubmit="v2Search(event)" role="search">
+      <input type="text" id="v2-search" placeholder="Search…" autocomplete="off" spellcheck="false" aria-label="Web search" />
+      <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+  </div>
+
+  <div class="link-groups">
+    <div class="link-group">
+      <div class="group-label">Workspace</div>
       {imtData.workspace.map(item => (
-        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+        <a class="link-item" href={item.url} target="_blank" rel="noopener">
+          <div class="li-icon"><i class={`fa-solid ${item.icon}`}></i></div>
+          <div class="li-text">
+            <div class="li-name">{item.label}</div>
+            <div class="li-host">{item.desc}</div>
+          </div>
+        </a>
       ))}
-    </Section>
+    </div>
 
-    <Section title="Resources" icon="fa-link">
+    <div class="link-group">
+      <div class="group-label">Resources</div>
       {imtData.resources.map(item => (
-        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+        <a class="link-item" href={item.url} target="_blank" rel="noopener">
+          <div class="li-icon"><i class={`fa-solid ${item.icon}`}></i></div>
+          <div class="li-text">
+            <div class="li-name">{item.label}</div>
+            <div class="li-host">{item.desc}</div>
+          </div>
+        </a>
       ))}
-    </Section>
+    </div>
 
-    <Section title="Forms" icon="fa-file-pen">
+    <div class="link-group">
+      <div class="group-label">Forms</div>
       {imtData.forms.map(item => (
-        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+        <a class="link-item" href={item.url} target="_blank" rel="noopener">
+          <div class="li-icon"><i class={`fa-solid ${item.icon}`}></i></div>
+          <div class="li-text">
+            <div class="li-name">{item.label}</div>
+            <div class="li-host">{item.desc}</div>
+          </div>
+        </a>
       ))}
-    </Section>
+    </div>
 
-    <Section title="Federal & Partner" icon="fa-landmark">
+    <div class="link-group">
+      <div class="group-label">Federal</div>
       {imtData.federal.map(item => (
-        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+        <a class="link-item" href={item.url} target="_blank" rel="noopener">
+          <div class="li-icon"><i class={`fa-solid ${item.icon}`}></i></div>
+          <div class="li-text">
+            <div class="li-name">{item.label}</div>
+            <div class="li-host">{item.desc}</div>
+          </div>
+        </a>
       ))}
-    </Section>
+    </div>
   </div>
-</BaseLayout>
 
-<style>
-  .dashboard-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    margin-bottom: 28px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    flex-wrap: wrap;
-  }
+  <div class="dash-footer">
+    <span>Arkansas Baptist Disaster Relief</span>
+    <span><a href="/">arkdr.org</a> · <a href="/imt/">IMT</a></span>
+  </div>
 
-  .dash-brand {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
+  <script is:inline>
+    function v2UpdateClock() {
+      const now = new Date();
+      let h = now.getHours();
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      document.getElementById('v2-time').textContent = h + ':' + m;
+      document.getElementById('v2-ampm').textContent = ' ' + ampm;
 
-  .dash-icon { width: 42px; height: 42px; }
+      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const months = ['January','February','March','April','May','June',
+                      'July','August','September','October','November','December'];
+      document.getElementById('v2-date').textContent =
+        days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate();
 
-  .dash-title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--yellow);
-    line-height: 1.2;
-  }
+      const hour = now.getHours();
+      let greeting = 'Good evening';
+      if (hour < 12) greeting = 'Good morning';
+      else if (hour < 17) greeting = 'Good afternoon';
+      document.getElementById('v2-greeting').textContent = greeting;
+    }
+    v2UpdateClock();
+    setInterval(v2UpdateClock, 10000);
 
-  .dash-subtitle {
-    font-size: 0.72rem;
-    color: var(--lavender);
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    margin-top: 2px;
-  }
+    function v2Search(e) {
+      e.preventDefault();
+      var q = document.getElementById('v2-search').value.trim();
+      if (q) window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank');
+    }
+  </script>
 
-  .dash-tools {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .search-form {
-    display: flex;
-  }
-
-  .search-input {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.14);
-    border-right: none;
-    border-radius: 6px 0 0 6px;
-    color: #fff;
-    font-size: 0.88rem;
-    padding: 8px 14px;
-    outline: none;
-    width: 240px;
-    transition: border-color 0.15s;
-  }
-  .search-input::placeholder { color: var(--gray); }
-  .search-input:focus { border-color: var(--blue); background: rgba(255,255,255,0.12); }
-
-  .search-btn {
-    background: var(--blue);
-    border: 1px solid var(--blue);
-    border-radius: 0 6px 6px 0;
-    color: #fff;
-    cursor: pointer;
-    font-size: 0.82rem;
-    font-weight: 600;
-    padding: 8px 16px;
-    transition: background 0.15s;
-  }
-  .search-btn:hover { background: var(--blue-hover); }
-
-  .clock-area { text-align: right; flex-shrink: 0; }
-
-  #clock {
-    font-size: 1.6rem;
-    font-weight: 300;
-    color: var(--yellow);
-    font-variant-numeric: tabular-nums;
-    line-height: 1;
-  }
-
-  #date {
-    font-size: 0.72rem;
-    color: var(--lavender);
-    margin-top: 4px;
-  }
-
-  @media (max-width: 768px) {
-    .dashboard-header { flex-direction: column; align-items: flex-start; }
-    .dash-tools { flex-wrap: wrap; width: 100%; }
-    .search-input { width: 100%; min-width: 0; flex: 1; }
-  }
-</style>
-
-<script is:inline>
-  /* Live clock */
-  function updateClock() {
-    const now = new Date();
-    let h = now.getHours();
-    const m = String(now.getMinutes()).padStart(2, '0');
-    const s = String(now.getSeconds()).padStart(2, '0');
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    h = h % 12 || 12;
-    document.getElementById('clock').textContent = h + ':' + m + ':' + s + ' ' + ampm;
-
-    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    const months = ['January','February','March','April','May','June',
-                    'July','August','September','October','November','December'];
-    document.getElementById('date').textContent =
-      days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
-  }
-  updateClock();
-  setInterval(updateClock, 1000);
-
-  /* Search */
-  function doSearch(e) {
-    e.preventDefault();
-    var q = document.getElementById('searchInput').value.trim();
-    if (q) window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank');
-  }
-</script>
+</body>
+</html>

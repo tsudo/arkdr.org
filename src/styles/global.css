@@ -1,8 +1,8 @@
 /* ── Color Palette ── */
 :root {
-  --navy:        #00004F;
-  --navy-dark:   #00003a;
-  --navy-light:  #0a0a5e;
+  --navy:        #0e1042;
+  --navy-dark:   #080a30;
+  --navy-light:  #181b5c;
   --yellow:      #FFFF06;
   --yellow-soft: #FFE033;
   --blue:        #0292BC;
@@ -183,6 +183,40 @@ body.imt .site-nav .imt-toggle {
 
 .footer-nav a:hover { color: var(--blue); }
 
+.footer-attribution {
+  font-size: 0.8rem;
+  color: var(--lavender);
+}
+
+.footer-attribution a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.footer-attribution a:hover { color: var(--yellow-soft); }
+
+.helpful-neighbor {
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.01em;
+}
+
+.helpful-neighbor i {
+  color: var(--blue);
+  margin-right: 3px;
+  font-size: 0.75rem;
+}
+
+.footer-bottom {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.footer-license {
+  font-size: 0.72rem;
+}
+
 .footer-license a { color: var(--blue); }
 .footer-license a:hover { color: var(--yellow-soft); }
 
@@ -194,27 +228,29 @@ body.imt .site-nav .imt-toggle {
 }
 
 .card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.15);
   border-radius: 10px;
   overflow: hidden;
 }
 
 .card-header {
-  background: var(--blue);
+  background: var(--navy-dark);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   padding: 10px 18px;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.card-header i { font-size: 0.9rem; opacity: 0.9; }
+.card-header i { font-size: 0.9rem; color: var(--blue); }
 
 .card-header span {
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: var(--yellow-soft);
 }
 
 .card-body {
@@ -230,8 +266,8 @@ a.link-btn {
   align-items: center;
   gap: 14px;
   padding: 11px 14px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: 7px;
   color: var(--white);
   text-decoration: none;
@@ -419,7 +455,6 @@ a.link-btn:hover .btn-arrow { opacity: 1; }
   .card-grid { grid-template-columns: 1fr; }
   .hero h2 { font-size: 1.4rem; }
   .site-nav a { padding: 6px 8px; font-size: 0.82rem; }
-  .site-nav .imt-toggle span.imt-label { display: none; }
   .footer-row { flex-direction: column; text-align: center; }
 }
 

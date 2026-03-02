@@ -16,9 +16,6 @@ import publicData from '../content/public.json';
       <a href={publicData.getInvolved[2].url} class="btn-secondary" target="_blank" rel="noopener">
         <i class="fa-solid fa-heart" aria-hidden="true"></i> Donate
       </a>
-      <a href="/resources/" class="btn-secondary">
-        <i class="fa-solid fa-book-open" aria-hidden="true"></i> Resources
-      </a>
     </div>
   </div>
 
@@ -28,25 +25,10 @@ import publicData from '../content/public.json';
     <a href={publicData.site.officialSite} target="_blank" rel="noopener">abscdisasterrelief.org</a>.
   </div>
 
+  <!-- Get Involved & Official -->
   <div class="card-grid">
     <Section title="Get Involved" icon="fa-hand-holding-heart">
       {publicData.getInvolved.map(item => (
-        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
-      ))}
-    </Section>
-
-    <Section title="FEMA & Federal" icon="fa-landmark">
-      {publicData.fema.slice(0, 2).map(item => (
-        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
-      ))}
-      {publicData.federal.slice(0, 2).map(item => (
-        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
-      ))}
-    </Section>
-
-    <Section title="Training" icon="fa-graduation-cap">
-      <Card icon="fa-graduation-cap" label="Training Events" desc="Upcoming ABDR training" url={publicData.getInvolved[1].url} />
-      {publicData.training.slice(0, 3).map(item => (
         <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
       ))}
     </Section>
@@ -57,4 +39,52 @@ import publicData from '../content/public.json';
       ))}
     </Section>
   </div>
+
+  <!-- Training & Apps -->
+  <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Training & Tools</h2>
+
+  <div class="card-grid">
+    <Section title="FEMA Courses" icon="fa-certificate">
+      {publicData.training.map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+    </Section>
+
+    <Section title="Mobile App & Training" icon="fa-mobile-screen-button">
+      {publicData.apps.map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+      <Card icon="fa-graduation-cap" label="ABDR Training Events" desc="Upcoming volunteer training" url={publicData.getInvolved[1].url} />
+      <Card icon="fa-book-open" label="Full FEMA Course Catalog" desc="All independent study courses" url={publicData.fema[2].url} />
+    </Section>
+  </div>
+
+  <!-- FEMA & Federal -->
+  <h2 class="section-title"><i class="fa-solid fa-landmark"></i> FEMA & Federal Resources</h2>
+
+  <div class="fema-text-box">
+    <h3><i class="fa-solid fa-mobile-screen-button"></i> FEMA Text Services</h3>
+    <div>Text <span class="text-number">{publicData.femaText.number}</span> (4FEMA)</div>
+    <ul>
+      {publicData.femaText.commands.map(cmd => (
+        <li><code>{cmd.command}</code> — {cmd.desc}</li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="card-grid">
+    <Section title="FEMA" icon="fa-landmark">
+      {publicData.fema.map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+    </Section>
+
+    <Section title="Federal & Partner" icon="fa-handshake">
+      {publicData.federal.map(item => (
+        <Card icon={item.icon} label={item.label} desc={item.desc} url={item.url} />
+      ))}
+    </Section>
+  </div>
+
+
 </BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import publicData from '../content/public.json';
+const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
@@ -9,13 +10,16 @@ import publicData from '../content/public.json';
   <div class="footer-row">
     <nav class="footer-nav" aria-label="Footer navigation">
       <a href="/">Home</a>
-      <a href="/resources/">Resources</a>
       <a href="/imt/">IMT</a>
       <a href={publicData.site.officialSite} target="_blank" rel="noopener">abscdisasterrelief.org</a>
     </nav>
+    <div class="footer-attribution">
+      A <strong class="helpful-neighbor"><i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i> Helpful Neighbor</strong> project by <a href="https://keithcrawford.me" target="_blank" rel="noopener">Keith Crawford</a>
+    </div>
+  </div>
+  <div class="footer-row footer-bottom">
     <div class="footer-license">
-      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
-      &middot; Built by <a href="https://keithcrawford.me" target="_blank" rel="noopener">Keith Crawford</a>
+      &copy; {year} arkdr.org &middot; Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
     </div>
   </div>
 </footer>

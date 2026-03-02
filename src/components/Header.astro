@@ -27,11 +27,9 @@ function isActive(path: string): string {
 
   <nav class="site-nav" aria-label="Main navigation">
     <a href="/" class={isActive('/')}>Home</a>
-    <a href="/resources/" class={isActive('/resources')}>Resources</a>
     <div class="nav-divider" aria-hidden="true"></div>
-    <a href="/imt/" class={`imt-toggle ${isActive('/imt')}`} title="IMT — Incident Management Team">
-      <i class="fa-solid fa-tower-broadcast" aria-hidden="true"></i>
-      <span class="imt-label">&nbsp;IMT</span>
+    <a href="/imt/" class={`imt-toggle ${isActive('/imt')}`} title="Incident Management Team" aria-label="IMT">
+      <i class="fa-solid fa-satellite-dish" aria-hidden="true"></i>
     </a>
   </nav>
 </header>
