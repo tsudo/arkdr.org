@@ -23,7 +23,7 @@
   "homepage": "https://github.com/tsudo/arkdr.org#readme",
   "private": "true",
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.2.4"
   },
   "pnpm": {
